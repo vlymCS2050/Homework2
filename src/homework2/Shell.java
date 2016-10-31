@@ -8,10 +8,7 @@
  *  Vicky Lym, 2016
  *
 */
-package shell;
-
-import java.io.*;
-import java.util.*;
+// package shell;
 
 /**
  *  The {@code Shell} class provides static methods for sorting an
@@ -35,16 +32,13 @@ public class Shell {
      * Rearranges the array in ascending order, using the natural order.
      * @param a the array to be sorted
      */
-    public static void sort(Comparable[] a) {
+    // public static void sort(Comparable[] a) {
+    public static void sort(Double[] a) {
         int n = a.length;
-        
-        // System.out.println("N elements in a" + n);
 
         // 3x+1 increment sequence:  1, 4, 13, 40, 121, 364, 1093, ... 
         int h = 1;
-        while (h < n/3) h = 3*h + 1; 
-
-        // System.out.println("h is " + h);
+        while (h < n/3) h = 3*h + 1;
         
         while (h >= 1) {
             // h-sort the array
@@ -67,13 +61,18 @@ public class Shell {
     ***************************************************************************/
     
     // is v < w ?
-    private static boolean less(Comparable v, Comparable w) {
-        return v.compareTo(w) < 0;
+    // private static boolean less(Comparable v, Comparable w) {
+    private static boolean less(Double v, Double w) {
+        if (v < w)
+           return true;
+        else
+           return false;
+        // return v.compareTo(w) < 0;
     }
         
     // exchange a[i] and a[j]
-    private static void exch(Object[] a, int i, int j) {
-        Object swap = a[i];
+    private static void exch(Double[] a, int i, int j) {
+        Double swap = a[i];
         a[i] = a[j];
         a[j] = swap;
     }
@@ -82,7 +81,8 @@ public class Shell {
    /***************************************************************************
     *  Check if array is sorted - useful for debugging.
     ***************************************************************************/
-    private static boolean isSorted(Comparable[] a) {
+    // private static boolean isSorted(Comparable[] a) {
+    private static boolean isSorted(Double[] a) {
         for (int i = 1; i < a.length; i++) {
             compares1 ++;
             if (less(a[i], a[i-1])) return false;
@@ -91,7 +91,8 @@ public class Shell {
     }
 
     // is the array h-sorted?
-    private static boolean isHsorted(Comparable[] a, int h) {
+    // private static boolean isHsorted(Comparable[] a, int h) {
+    private static boolean isHsorted(Double[] a, int h) {
         for (int i = h; i < a.length; i++) {
             compares2 ++;
             if (less(a[i], a[i-h])) return false;
@@ -100,7 +101,8 @@ public class Shell {
     }
 
     // print array to standard output
-    private static void show(Comparable[] a) {
+    // private static void show(Comparable[] a) {
+    private static void show(Double[] a) {
         for (int i = 0; i < a.length; i++) {
             StdOut.println(a[i]);
         }
@@ -122,25 +124,14 @@ public class Shell {
         int arrayN = 0;
         float diff;
 
-        Scanner in = new Scanner(System.in);
-        // while(StdIn.hasNextLine()) {
-        // while (!( line = StdIn.readLine() ).equals( "" )) {
-        // while (!(line = in.next(()
-        // line = in.next();
-        //  while ((!(line.equals("?"))) || (ind < 10)) {       
-        //    a[ind] = line;
-        //    ind++;
-        //    line = in.next();
-        // }
-        // show(a);
         compares = 0;
         for (int i = 0; i < 100; i++)
             a100[i] = StdRandom.uniform();
         arrayN = a100.length;
         Shell.sort(a100);
         diff = (float)compares / 100;
-        System.out.println("Compares = " + compares);
-        System.out.printf("Percentage of Compares for 100 Elements is %.2f \n\n", diff);       
+        StdOut.println("Compares = " + compares);
+        StdOut.printf("Percentage of Compares for 100 Elements is %.2f \n\n", diff);       
         
         compares = 0;
         for (int i = 0; i < 1000; i++)
@@ -148,8 +139,8 @@ public class Shell {
         arrayN = a1000.length;
         Shell.sort(a1000);
         diff = (float)compares / 1000;
-        System.out.println("Compares = " + compares);
-        System.out.printf("Percentage of Compares for 1000 Elements is %.2f \n\n", diff);
+        StdOut.println("Compares = " + compares);
+        StdOut.printf("Percentage of Compares for 1000 Elements is %.2f \n\n", diff);
         
         compares = 0;
         for (int i = 0; i < 10000; i++)
@@ -157,8 +148,8 @@ public class Shell {
         arrayN = a10000.length;
         Shell.sort(a10000);
         diff = (float)compares / 10000;
-        System.out.println("Compares = " + compares);
-        System.out.printf("Percentage of Compares for 10000 Elements is %.2f \n", diff);
+        StdOut.println("Compares = " + compares);
+        StdOut.printf("Percentage of Compares for 10000 Elements is %.2f \n", diff);
     }
 
 }
